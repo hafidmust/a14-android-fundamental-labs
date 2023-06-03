@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         liveDataTimerViewModel = ViewModelProvider(this)[MainViewModel::class.java]
         subscribe()
+        subsribeKali()
     }
 
     private fun subscribe() {
@@ -42,5 +43,12 @@ class MainActivity : AppCompatActivity() {
             activityMainBinding.timerTextview.text = newText
         }
         liveDataTimerViewModel.getElapsedTime().observe(this, elapsedTimeObserver)
+    }
+
+    private fun subsribeKali(){
+        val cobaObserver = Observer<Long>{
+            activityMainBinding.tvCoba.text = it.toString()
+        }
+        liveDataTimerViewModel.getKali().observe(this,cobaObserver)
     }
 }

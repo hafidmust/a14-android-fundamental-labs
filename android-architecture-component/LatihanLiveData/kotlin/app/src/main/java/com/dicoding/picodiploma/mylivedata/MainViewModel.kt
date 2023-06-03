@@ -29,6 +29,7 @@ class MainViewModel : ViewModel() {
 
     private val mInitialTime = SystemClock.elapsedRealtime()
     private val mElapsedTime = MutableLiveData<Long?>()
+    private val kali = MutableLiveData<Long>()
 
     init {
         val timer = Timer()
@@ -36,11 +37,15 @@ class MainViewModel : ViewModel() {
             override fun run() {
                 val newValue = (SystemClock.elapsedRealtime() - mInitialTime) / 1000
                 mElapsedTime.postValue(newValue)
+                kali.postValue(newValue * 2)
             }
         }, ONE_SECOND.toLong(), ONE_SECOND.toLong())
     }
 
     fun getElapsedTime(): LiveData<Long?> {
         return mElapsedTime
+    }
+    fun getKali() : LiveData<Long>{
+        return kali
     }
 }
